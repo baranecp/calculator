@@ -35,6 +35,13 @@ buttons.forEach(button => {
             return;
         }
 
+        //Backspace
+        if(val === '←') {
+            curVal = curVal.slice(0, -1);
+            inputField.textContent = curVal;
+            return;
+        }
+
         
     })
 })
