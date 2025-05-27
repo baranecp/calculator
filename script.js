@@ -1,8 +1,8 @@
-const inputField = document.querySelector(".display");
-const buttons = document.querySelectorAll(".buttons button");
+const inputField = document.querySelector('.display');
+const buttons = document.querySelectorAll('.buttons button');
 
-let curVal = "";
-let oldVal = "";
+let curVal = '';
+let oldVal = '';
 let operator = null;
 
 const add = (a, b) => a + b;
@@ -17,7 +17,24 @@ const operate = (a, b, op) => {
     case '+': return add(a, b);
     case '-': return subtract(a, b);
     case '*': return multiply(a, b);
-    case '/': return b !== 0 ? divide(a, b) : "Error";
+    case '/': return b !== 0 ? divide(a, b) : 'Error';
     default: return b;
   }
 };
+
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        const val = button.textContent;
+
+        //Clear
+        if(val === 'C') {
+            curVal = '';
+            oldVal = '';
+            operator = null;
+            inputField.textContent = '';
+            return;
+        }
+
+        
+    })
+})
