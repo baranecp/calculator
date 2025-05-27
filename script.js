@@ -4,6 +4,7 @@ const buttons = document.querySelectorAll('.buttons button');
 let curVal = '';
 let oldVal = '';
 let operator = null;
+let isEvaluated = false;
 
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
@@ -31,17 +32,54 @@ buttons.forEach(button => {
             curVal = '';
             oldVal = '';
             operator = null;
+            isEvaluated = false;
             inputField.textContent = '';
             return;
         }
 
         //Backspace
         if(val === '←') {
-            curVal = curVal.slice(0, -1);
+            if(isEvaluated) {
+                curVal = ''
+                isEvaluated = false;
+            } else {
+                curVal = curVal.slice(0, -1);
+            }
             inputField.textContent = curVal;
             return;
         }
 
-        
+        //Equals
+        if(val === '=') {
+            if(curVal && oldVal && operator) {
+                const result = operate(oldVal, curVal, operator);
+                inputField.textContent = result;
+                curVal = result.toString();
+                oldVal = '';
+                operator = null;
+                isEvaluated = true;
+            }
+            return;
+        }
+
+        //Operator
+        if(['+', '-', '*', '/'].includes(val)) {
+            if(curVal !== '') {
+                oldVal = curVal;
+                curVal = '';
+                operator = val;
+                isEvaluated = false;
+            }
+            return;
+        }
+
+        // Number or dot
+        if(isEvaluated) {
+            curVal = val;
+            isEvaluated = false;
+        } else {
+            curVal += val;
+        }
+        inputField.textContent = curVal;
     })
 })
