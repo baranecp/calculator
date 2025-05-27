@@ -74,12 +74,22 @@ buttons.forEach(button => {
         }
 
         // Number or dot
-        if(isEvaluated) {
-            curVal = val;
-            isEvaluated = false;
+        if (val === ".") {
+            if (curVal.includes(".")) return; // prevent multiple decimals
+            if (curVal === "") {
+                curVal = "0."; // prevent leading "."
+            } else {
+                curVal += ".";
+            }
         } else {
-            curVal += val;
+            if (isEvaluated) {
+                curVal = val; 
+                isEvaluated = false;
+            } else {
+                curVal += val;
         }
-        inputField.textContent = curVal;
+      }
+
+      inputField.textContent = curVal;
     })
 })
