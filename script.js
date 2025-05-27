@@ -10,3 +10,14 @@ const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
+const operate = (a, b, op) => {
+  a = Number(a);
+  b = Number(b);
+  switch (op) {
+    case '+': return add(a, b);
+    case '-': return subtract(a, b);
+    case '*': return multiply(a, b);
+    case '/': return b !== 0 ? divide(a, b) : "Error";
+    default: return b;
+  }
+};
