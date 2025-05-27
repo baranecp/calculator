@@ -15,7 +15,7 @@ body {
   width: 320px;
 }
 
-#display {
+.display {
   width: 93%;
   height: 60px;
   background-color: #000;
